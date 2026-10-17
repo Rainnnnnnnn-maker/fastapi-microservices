@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ems-telemetry-staging",
+  "main": "src/telemetry_worker.py",
+  "compatibility_date": "2026-10-17",
+  "compatibility_flags": ["python_workers"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {"enabled": true, "head_sampling_rate": 1},
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "ems-telemetry-staging",
+    "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+    "migrations_dir": "migrations"
+  }]
+}
+

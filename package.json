@@ -1,0 +1,7 @@
+{
+  "name": "ems-workers-tooling",
+  "private": true,
+  "description": "Wrangler only; all application code and dependencies are Python/uv",
+  "engines": {"node": ">=24"},
+  "devDependencies": {"wrangler": "4.151.1"}
+}

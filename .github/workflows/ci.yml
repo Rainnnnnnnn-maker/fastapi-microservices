@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          python-version: "3.14"
+          enable-cache: true
+      - name: Install locked dependencies
+        run: |
+          uv sync --frozen --python 3.14
+          npm ci
+      - name: Lint and check formatting
+        run: |
+          uv run --frozen ruff check .
+          uv run --frozen ruff format --check .
+      - name: Test APIs and demand rules
+        run: uv run --frozen pytest
+      - name: Bundle telemetry Worker
+        run: uv run --frozen pywrangler deploy --dry-run -c wrangler.jsonc --outdir dist/telemetry
+      - name: Bundle demand Worker
+        run: uv run --frozen pywrangler deploy --dry-run -c wrangler.demand.jsonc --outdir dist/demand

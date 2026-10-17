@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ems-demand-staging",
+  "main": "src/demand_worker.py",
+  "compatibility_date": "2026-10-17",
+  "compatibility_flags": ["python_workers"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {"enabled": true, "head_sampling_rate": 1},
+  "services": [{"binding": "TELEMETRY", "service": "ems-telemetry-staging"}]
+}

@@ -1,0 +1,34 @@
+[project]
+name = "ems-microservices"
+version = "0.1.0"
+description = "Learning scaffold: FastAPI EMS services on Cloudflare Python Workers"
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+dependencies = ["fastapi>=0.115,<1", "pydantic>=2.10,<3"]
+
+[dependency-groups]
+dev = [
+  "httpx>=0.28,<1",
+  "pytest>=8,<10",
+  "ruff>=0.11,<1",
+  "uvicorn>=0.34,<1",
+  "workers-py",
+  "workers-runtime-sdk",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+src = ["src"]
+extend-exclude = [".venv-workers", "python_modules", "dist", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
