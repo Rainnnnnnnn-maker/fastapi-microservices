@@ -10,7 +10,7 @@
   "d1_databases": [{
     "binding": "DB",
     "database_name": "ems-telemetry-staging",
-    "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+    "database_id": "032c8f0c-0a51-426f-bd7e-51e9bde1c594",
     "migrations_dir": "migrations"
   }]
 }
